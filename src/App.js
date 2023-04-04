@@ -561,7 +561,7 @@ function App() {
         const pool = getContract('PoolImplementation', "0xdE57c591de8B3675C43fB955725b62e742b1c0B4")
         console.log(data.marketsInfo[bSymbol].bAddress, toAmount(amount, data.marketsInfo[bSymbol].decimals), await getOracleSignatures())
         let signatures = await getOracleSignatures()
-        let valueLength = signatures.length ? signatures.length : 20
+        let valueLength = signatures[0].length ? signatures[0].length : 20
         await pool.methods.addLiquidity(
             data.marketsInfo[bSymbol].bAddress, toAmount(amount, data.marketsInfo[bSymbol].decimals), signatures
         ).send({ from: data.account, value: valueLength })
@@ -572,7 +572,7 @@ function App() {
     const onRemoveLiquidity = async (bSymbol, amount) => {
         const pool = getContract('PoolImplementation', "0xdE57c591de8B3675C43fB955725b62e742b1c0B4")
         let signatures = await getOracleSignatures()
-        let valueLength = signatures.length ? signatures.length : 20
+        let valueLength = signatures[0].length ? signatures[0].length : 20
         await pool.methods.removeLiquidity(
             data.marketsInfo[bSymbol].bAddress, toAmount(amount, data.marketsInfo[bSymbol].decimals), signatures
         ).send({ from: data.account, value: valueLength })
